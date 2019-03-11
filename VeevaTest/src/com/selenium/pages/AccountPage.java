@@ -1,22 +1,43 @@
 package com.selenium.pages;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class AccountPage {
 	WebDriver driver;
-	By recordACallButton = By.cssSelector("td[id=\"topButtonRow\"] input.btn[value=\"Record a Call\"]");
-	By formTitle = By.cssSelector("div.bPageTitle.content h1");
+	Properties selector;
 
-	public AccountPage(WebDriver driver) {
+	/**
+	 * Class constructor specifying the WebDriver
+	 * 
+	 * @param driver
+	 * @throws IOException
+	 */
+	public AccountPage(WebDriver driver) throws IOException {
 		this.driver = driver;
+		// load properties
+		selector = new Properties();
+		FileInputStream objfile = new FileInputStream(System.getProperty("user.dir") + "\\selector.properties");
+		selector.load(objfile);
 	}
 
+	/**
+	 * clicks the "Record a Call" button
+	 */
 	public void clickRecordACall() {
-		driver.findElement(recordACallButton).click();
+		driver.findElement(By.cssSelector(selector.getProperty("record_a_call_button"))).click();
 	}
 
+	/**
+	 * returns the title of the current screen
+	 * 
+	 * @return String of the title of the current screen
+	 */
 	public String getPageTitle() {
-		return driver.findElement(formTitle).getText();
+		return driver.findElement(By.cssSelector(selector.getProperty("form_title"))).getText();
 	}
 }
