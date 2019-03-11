@@ -8,6 +8,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import com.selenium.pages.AccountPage;
+import com.selenium.pages.CallReportPage;
+import com.selenium.pages.HomePage;
 import com.selenium.pages.LoginPage;
 import com.selenium.pages.MyAccountsTab;
 
@@ -27,7 +30,10 @@ import com.selenium.pages.MyAccountsTab;
 public class TestCallReport {
 	WebDriver driver;
 	LoginPage objLogin;
+	HomePage objHome;
 	MyAccountsTab objAccountsTab;
+	AccountPage objAccount;
+	CallReportPage objCallReport;
 	private static final String USER_ID = "bb67@bb2.com", PASSWORD = "bugb1234", URL = "https://login.salesforce.com/",
 			NAME_FROM_LIST = "Adams, Bob", RECORD_TYPE = "Mass Add Promo Call";
 	private static final String[] CALL_DISCUSSION_PRODUCTS = { "Cholecap", "Labrinone" };
@@ -42,19 +48,22 @@ public class TestCallReport {
 		driver.navigate().to(URL);
 		driver.manage().window().maximize();
 		objLogin = new LoginPage(driver);
+		objHome = new HomePage(driver);
+		objAccountsTab = new MyAccountsTab(driver);
+		objAccount = new AccountPage(driver);
+		objCallReport = new CallReportPage(driver);
 		objLogin.loginToSalesforce(USER_ID, PASSWORD);
 	}
 
 	@Test
 	public void recordACall() {
 		// 2. Navigate to "My Accounts" using tab near top of home page.
-		objAccountsTab = new MyAccountsTab(driver);
-		objAccountsTab.clickMyAccounts();
+		objHome.clickMyAccounts();
 		// 3. Select "Adams, Bob" from the My Accounts list.
 		objAccountsTab.clickName(NAME_FROM_LIST);
 		// 4. Near the top of the Account page is a "Record A Call" button. Select this
 		// button.
-		objAccountsTab.clickRecordACall();
+		objAccount.clickRecordACall();
 		// 5. Validate the Call Report page is displayed.
 		{
 			String actualTitle = objAccountsTab.getFormTitle();
@@ -62,11 +71,11 @@ public class TestCallReport {
 		}
 		// 6. On Call Report page, select "Mass Add Promo Call" from the Record Type
 		// drop down list.
-		objAccountsTab.selectRecordType(RECORD_TYPE);
+		objCallReport.selectRecordType(RECORD_TYPE);
 		// 7. On Call Report page, the script should select Cholecap and Labrinone in
 		// Detail Priority section.
 		for (String product : CALL_DISCUSSION_PRODUCTS) {
-			objAccountsTab.selectDetailingPriorityOptions(product);
+			objCallReport.selectDetailingPriorityOptions(product);
 		}
 		// 8. Under Call Discussions section, make sure a subsection appeared for both
 		// Cholecap and Labrinone. Also make sure the "Product" fields are set to the
@@ -75,29 +84,28 @@ public class TestCallReport {
 		// 9. On the same Call Discussion section, make sure each section appears in
 		// order the product was selected. If Labrinone was selected first, then
 		// Labrinone should show up first (from top down) under Call Discussion section.
-		List<String> products = objAccountsTab.getCallDiscussionProducts();
+		List<String> products = objCallReport.getCallDiscussionProducts();
 		for (int i = 0; i < products.size(); i++) {
 			Assert.assertTrue(products.get(i).contains(CALL_DISCUSSION_PRODUCTS[i]));
 		}
 		// 10. In Samples and Promotional Items section, select "QNASL Co-Pay Card", and
 		// change quantity to 2.
-		objAccountsTab.selectSamplesAndPromotionalItems("QNASL Co-Pay Card", "2");
+		objCallReport.selectSamplesAndPromotionalItems("QNASL Co-Pay Card", "2");
 		// 11. Call report should be saved by clicking "Save" button with a check for
 		// successful submission.
-		objAccountsTab.saveCall();
+		objCallReport.saveCall();
 		{
-			String actualTitle = objAccountsTab.getFormTitle();
+			String actualTitle = objCallReport.getPageTitle();
 			Assert.assertEquals(actualTitle, "Mass Add Promo Call");
 		}
 
 	}
 
 	@AfterTest
-	public void teardown() throws InterruptedException {
+	public void teardown() {
 		// 12. As final step, the script should logout (found on drop down menu in upper
 		// right
-		objAccountsTab.logout();
-		Thread.sleep(5000);
+		objHome.logout();
 		driver.close();
 	}
 }
