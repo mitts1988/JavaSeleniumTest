@@ -89,6 +89,7 @@ public class TestCallReport {
 			String actualTitle = objAccountsTab.getFormTitle();
 			Assert.assertEquals(actualTitle, "Mass Add Promo Call");
 		}
+
 	}
 
 	@AfterTest
