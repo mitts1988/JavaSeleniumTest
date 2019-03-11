@@ -1,5 +1,8 @@
 package com.selenium.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +15,9 @@ public class MyAccountsTab {
 	By recordACallButton = By.cssSelector("td[id=\"topButtonRow\"] input.btn[value=\"Record a Call\"]");
 	By formTitle = By.cssSelector("div.bPageTitle.content h1");
 	By recordTypeMenu = By.id("RecordTypeId");
+//	By callDiscussionElements = By.cssSelector(
+//			"div[name=\"zvod_Product_Discussion_vod__c\"] tr [ng-repeat=\"discussion in call.data.Call2_Discussion_vod__r | filter : deleteFilter track by $index\"]");
+//	By callDiscussionProducts = By.cssSelector("select[ng-change=\"updateProduct(discussion)\"]");
 
 	public MyAccountsTab(WebDriver driver) {
 		this.driver = driver;
@@ -48,5 +54,16 @@ public class MyAccountsTab {
 
 	public void selectDetailingPriorityOptions(String strOption) {
 		driver.findElement(By.cssSelector("#vod_detailing input[name=\"" + strOption + "\"]")).click();
+	}
+
+	public List<String> getCallDiscussionProducts() {
+		List<WebElement> eles = driver.findElements(By.xpath("//select[@ng-change='updateProduct(discussion)']"));
+		List<String> products = new ArrayList<String>();
+		for(WebElement e : eles) {
+			Select sel = new Select(e);
+			String product = sel.getFirstSelectedOption().getText();
+			products.add(product);
+		}
+		return products;
 	}
 }
