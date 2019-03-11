@@ -15,9 +15,10 @@ public class MyAccountsTab {
 	By recordACallButton = By.cssSelector("td[id=\"topButtonRow\"] input.btn[value=\"Record a Call\"]");
 	By formTitle = By.cssSelector("div.bPageTitle.content h1");
 	By recordTypeMenu = By.id("RecordTypeId");
-//	By callDiscussionElements = By.cssSelector(
-//			"div[name=\"zvod_Product_Discussion_vod__c\"] tr [ng-repeat=\"discussion in call.data.Call2_Discussion_vod__r | filter : deleteFilter track by $index\"]");
-//	By callDiscussionProducts = By.cssSelector("select[ng-change=\"updateProduct(discussion)\"]");
+	By saveCallButton = By.cssSelector("td#bottomButtonRow input.btn[name='Save']");
+	By title = By.cssSelector("h2.mainTitle.ng-binding");
+	By userMenu = By.id("userNavButton");
+	By logout = By.cssSelector("a[title='Logout']");
 
 	public MyAccountsTab(WebDriver driver) {
 		this.driver = driver;
@@ -73,5 +74,18 @@ public class MyAccountsTab {
 				+ "']/../../..//input[@ng-model='row.data.Quantity_vod__c']"));
 		e.clear();
 		e.sendKeys(quantity);
+	}
+
+	public void saveCall() {
+		driver.findElement(saveCallButton).click();
+	}
+
+	public String getTitle() {
+		return driver.findElement(title).getText();
+	}
+
+	public void logout() {
+		driver.findElement(userMenu).click();
+		driver.findElement(logout).click();
 	}
 }

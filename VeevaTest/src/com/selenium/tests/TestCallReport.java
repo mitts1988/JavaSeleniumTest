@@ -56,8 +56,10 @@ public class TestCallReport {
 		// button.
 		objAccountsTab.clickRecordACall();
 		// 5. Validate the Call Report page is displayed.
-		String actual = objAccountsTab.getFormTitle();
-		Assert.assertEquals(actual, "Call Report");
+		{
+			String actualTitle = objAccountsTab.getFormTitle();
+			Assert.assertEquals(actualTitle, "Call Report");
+		}
 		// 6. On Call Report page, select "Mass Add Promo Call" from the Record Type
 		// drop down list.
 		objAccountsTab.selectRecordType(RECORD_TYPE);
@@ -82,12 +84,18 @@ public class TestCallReport {
 		objAccountsTab.selectSamplesAndPromotionalItems("QNASL Co-Pay Card", "2");
 		// 11. Call report should be saved by clicking "Save" button with a check for
 		// successful submission.
-		// 12. As final step, the script should logout (found on drop down menu in upper
-		// right
+		objAccountsTab.saveCall();
+		{
+			String actualTitle = objAccountsTab.getFormTitle();
+			Assert.assertEquals(actualTitle, "Mass Add Promo Call");
+		}
 	}
 
 	@AfterTest
 	public void teardown() throws InterruptedException {
+		// 12. As final step, the script should logout (found on drop down menu in upper
+		// right
+		objAccountsTab.logout();
 		Thread.sleep(5000);
 		driver.close();
 	}
