@@ -59,11 +59,19 @@ public class MyAccountsTab {
 	public List<String> getCallDiscussionProducts() {
 		List<WebElement> eles = driver.findElements(By.xpath("//select[@ng-change='updateProduct(discussion)']"));
 		List<String> products = new ArrayList<String>();
-		for(WebElement e : eles) {
+		for (WebElement e : eles) {
 			Select sel = new Select(e);
 			String product = sel.getFirstSelectedOption().getText();
 			products.add(product);
 		}
 		return products;
+	}
+
+	public void selectSamplesAndPromotionalItems(String item, String quantity) {
+		driver.findElement(By.xpath("//label[normalize-space(text())='" + item + "']")).click();
+		WebElement e = driver.findElement(By.xpath("//span[normalize-space(text())='" + item
+				+ "']/../../..//input[@ng-model='row.data.Quantity_vod__c']"));
+		e.clear();
+		e.sendKeys(quantity);
 	}
 }

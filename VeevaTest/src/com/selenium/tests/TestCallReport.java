@@ -79,7 +79,7 @@ public class TestCallReport {
 		}
 		// 10. In Samples and Promotional Items section, select "QNASL Co-Pay Card", and
 		// change quantity to 2.
-		
+		objAccountsTab.selectSamplesAndPromotionalItems("QNASL Co-Pay Card", "2");
 		// 11. Call report should be saved by clicking "Save" button with a check for
 		// successful submission.
 		// 12. As final step, the script should logout (found on drop down menu in upper
