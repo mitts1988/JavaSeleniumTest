@@ -21,7 +21,8 @@ public class LoginPage {
 
 	/**
 	 * inputs user name into textbox
-	 * @param strUserName 
+	 * 
+	 * @param strUserName
 	 */
 	public void inputUserName(String strUserName) {
 		driver.findElement(By.id(selector.getProperty("username_textbox"))).sendKeys(strUserName);

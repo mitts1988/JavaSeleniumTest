@@ -47,8 +47,10 @@ public class CallReportPage {
 	 * @param strOption the name of the detailing priority to be chosen
 	 */
 	public void selectDetailingPriorityOptions(String strOption) {
-		driver.findElement(By.cssSelector(selector.getProperty("detailing_priority_options") + strOption + "']"))
-				.click();
+		String xpath = selector.getProperty("detailing_priority_options");
+		xpath = new StringBuilder(xpath).insert(xpath.indexOf("'") + 1, strOption).toString();
+		System.out.println(xpath);
+		driver.findElement(By.cssSelector(xpath)).click();
 	}
 
 	/**
@@ -75,9 +77,14 @@ public class CallReportPage {
 	 * @param quantity number of the selected item you want
 	 */
 	public void selectSamplesAndPromotionalItems(String item, String quantity) {
-		driver.findElement(By.xpath(selector.getProperty("samples_and_promotional_items") + item + "']")).click();
-		WebElement e = driver.findElement(By.xpath(selector.getProperty("samples_and_promotional_items_quantity_1")
-				+ item + selector.getProperty("samples_and_promotional_items_quantity_2")));
+		// clicks the checkbox next to the item
+		String xpath = selector.getProperty("samples_and_promotional_items");
+		xpath = new StringBuilder(xpath).insert(xpath.indexOf("'") + 1, item).toString();
+		driver.findElement(By.xpath(xpath)).click();
+		// updates the quantity of the item in the new section below
+		xpath = selector.getProperty("samples_and_promotional_items_quantity");
+		xpath = new StringBuilder(xpath).insert(xpath.indexOf("'") + 1, item).toString();
+		WebElement e = driver.findElement(By.xpath(xpath));
 		e.clear();
 		e.sendKeys(quantity);
 	}
@@ -87,14 +94,5 @@ public class CallReportPage {
 	 */
 	public void saveCall() {
 		driver.findElement(By.cssSelector(selector.getProperty("save_button"))).click();
-	}
-
-	/**
-	 * Returns the title of the current section
-	 * 
-	 * @return the title of the current section
-	 */
-	public String getPageTitle() {
-		return driver.findElement(By.cssSelector(selector.getProperty("form_title"))).getText();
 	}
 }

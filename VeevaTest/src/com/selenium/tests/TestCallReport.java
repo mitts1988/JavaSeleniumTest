@@ -16,6 +16,7 @@ import com.selenium.pages.CallReportPage;
 import com.selenium.pages.HomePage;
 import com.selenium.pages.LoginPage;
 import com.selenium.pages.MyAccountsTab;
+import com.selenium.pages.SavedCallReport;
 
 public class TestCallReport {
 	WebDriver driver;
@@ -24,6 +25,7 @@ public class TestCallReport {
 	MyAccountsTab objAccountsTab;
 	AccountPage objAccount;
 	CallReportPage objCallReport;
+	SavedCallReport objSavedCallReport;
 	Properties props;
 
 	@BeforeTest
@@ -46,6 +48,7 @@ public class TestCallReport {
 		objAccountsTab = new MyAccountsTab(driver);
 		objAccount = new AccountPage(driver);
 		objCallReport = new CallReportPage(driver);
+		objSavedCallReport = new SavedCallReport(driver);
 
 		// 1. Log-in to application from a web browser (e.g. Internet Explorer, Firefox,
 		// Chrome, etc.).
@@ -64,7 +67,8 @@ public class TestCallReport {
 		// 5. Validate the Call Report page is displayed.
 		{
 			String actualTitle = objAccountsTab.getFormTitle();
-			Assert.assertEquals(actualTitle, "Call Report");
+			Assert.assertEquals(actualTitle, "Call Report",
+					"Not on Call Report page after clicking on a name from My Accounts list");
 		}
 		// 6. On Call Report page, select "Mass Add Promo Call" from the Record Type
 		// drop down list.
@@ -94,8 +98,18 @@ public class TestCallReport {
 		// successful submission.
 		objCallReport.saveCall();
 		{
-			String actualTitle = objCallReport.getPageTitle();
-			Assert.assertEquals(actualTitle, "Mass Add Promo Call");
+			String actualTitle = objSavedCallReport.getPageTitle();
+			String expectedTitle = props.getProperty("record_type");
+			Assert.assertEquals(actualTitle, expectedTitle,
+					"Expected to be on a " + expectedTitle + " page, but on a " + actualTitle + " instead.");
+			String actualName = objSavedCallReport.getAccountName();
+			String expectedName = props.getProperty("name_from_account_list");
+			Assert.assertEquals(actualName, expectedName,
+					"Expected " + expectedName + " to be the account holder, but " + actualName + " is.");
+			String actualStatus = objSavedCallReport.getStatus();
+			String expectedStatus = props.getProperty("expected_call_report_status");
+			Assert.assertEquals(actualStatus, expectedStatus,
+					"Expected " + expectedStatus + " to be the report status, but " + actualStatus + " is.");
 		}
 		// return to home screen for next test
 		objHome.clickHome();

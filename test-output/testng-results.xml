@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="67514" started-at="2019-03-12T14:19:48Z" finished-at="2019-03-12T14:20:55Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="67514" started-at="2019-03-12T14:19:48Z" finished-at="2019-03-12T14:20:55Z">
+      <class name="com.selenium.tests.TestCallReport">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.selenium.tests.TestCallReport@6acdbdf5]" name="setup" is-config="true" duration-ms="12644" started-at="2019-03-12T14:19:48Z" finished-at="2019-03-12T14:20:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="recordACall()[pri:0, instance:com.selenium.tests.TestCallReport@6acdbdf5]" name="recordACall" duration-ms="54239" started-at="2019-03-12T14:20:00Z" finished-at="2019-03-12T14:20:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- recordACall -->
+        <test-method status="PASS" signature="teardown()[pri:0, instance:com.selenium.tests.TestCallReport@6acdbdf5]" name="teardown" is-config="true" duration-ms="612" started-at="2019-03-12T14:20:55Z" finished-at="2019-03-12T14:20:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+      </class> <!-- com.selenium.tests.TestCallReport -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

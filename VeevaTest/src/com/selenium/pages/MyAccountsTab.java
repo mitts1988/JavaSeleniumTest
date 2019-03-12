@@ -32,7 +32,9 @@ public class MyAccountsTab {
 	 */
 	public void clickName(String strName) {
 		driver.switchTo().frame(selector.getProperty("my_accounts_iframe"));
-		driver.findElement(By.xpath(selector.getProperty("my_accounts_name") + strName + "']")).click();
+		String xpath = selector.getProperty("my_accounts_name");
+		xpath = new StringBuilder(xpath).insert(xpath.indexOf("'") + 1, strName).toString();
+		driver.findElement(By.xpath(xpath)).click();
 	}
 
 	/**
