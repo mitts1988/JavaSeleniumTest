@@ -49,7 +49,6 @@ public class CallReportPage {
 	public void selectDetailingPriorityOptions(String strOption) {
 		String xpath = selector.getProperty("detailing_priority_options");
 		xpath = new StringBuilder(xpath).insert(xpath.indexOf("'") + 1, strOption).toString();
-		System.out.println(xpath);
 		driver.findElement(By.cssSelector(xpath)).click();
 	}
 
