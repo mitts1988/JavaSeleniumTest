@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="VeevaTest/src"/>
-	<classpathentry kind="lib" path="C:/SeleniumJars/selenium-server-3.9.1.zip"/>
-	<classpathentry kind="lib" path="C:/SeleniumJars/selenium-server-standalone-3.9.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="lib" path="SeleniumJars/selenium-server-3.9.1.zip"/>
+	<classpathentry kind="lib" path="SeleniumJars/selenium-server-standalone-3.9.1.jar"/>
 	<classpathentry kind="output" path="VeevaTest/bin"/>
 </classpath>
