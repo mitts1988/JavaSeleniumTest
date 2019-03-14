@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="129887" started-at="2019-03-14T14:46:52Z" finished-at="2019-03-14T14:49:02Z">
+  <suite name="Default suite" duration-ms="82770" started-at="2019-03-14T16:03:21Z" finished-at="2019-03-14T16:04:44Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="129887" started-at="2019-03-14T14:46:52Z" finished-at="2019-03-14T14:49:02Z">
+    <test name="Default test" duration-ms="82770" started-at="2019-03-14T16:03:21Z" finished-at="2019-03-14T16:04:44Z">
       <class name="com.selenium.tests.TestCallReport">
-        <test-method status="PASS" signature="setup()[pri:0, instance:com.selenium.tests.TestCallReport@4d41cee]" name="setup" is-config="true" duration-ms="49341" started-at="2019-03-14T14:46:52Z" finished-at="2019-03-14T14:47:41Z">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.selenium.tests.TestCallReport@4d41cee]" name="setup" is-config="true" duration-ms="13943" started-at="2019-03-14T16:03:21Z" finished-at="2019-03-14T16:03:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="recordACall()[pri:0, instance:com.selenium.tests.TestCallReport@4d41cee]" name="recordACall" duration-ms="80168" started-at="2019-03-14T14:47:41Z" finished-at="2019-03-14T14:49:02Z">
+        <test-method status="PASS" signature="recordACall()[pri:0, instance:com.selenium.tests.TestCallReport@4d41cee]" name="recordACall" duration-ms="68452" started-at="2019-03-14T16:03:35Z" finished-at="2019-03-14T16:04:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- recordACall -->
-        <test-method status="PASS" signature="teardown()[pri:0, instance:com.selenium.tests.TestCallReport@4d41cee]" name="teardown" is-config="true" duration-ms="349" started-at="2019-03-14T14:49:02Z" finished-at="2019-03-14T14:49:02Z">
+        <test-method status="PASS" signature="teardown()[pri:0, instance:com.selenium.tests.TestCallReport@4d41cee]" name="teardown" is-config="true" duration-ms="356" started-at="2019-03-14T16:04:44Z" finished-at="2019-03-14T16:04:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->

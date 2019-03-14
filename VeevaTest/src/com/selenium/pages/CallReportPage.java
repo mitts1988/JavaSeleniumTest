@@ -1,6 +1,5 @@
 package com.selenium.pages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -20,7 +19,7 @@ public class CallReportPage {
 	 * @param driver
 	 * @throws IOException
 	 */
-	public CallReportPage(WebDriver driver, Properties selectors) throws IOException {
+	public CallReportPage(WebDriver driver, Properties selectors) {
 		this.driver = driver;
 		this.selectors = selectors;
 	}

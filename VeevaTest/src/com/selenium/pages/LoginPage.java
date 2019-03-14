@@ -1,6 +1,5 @@
 package com.selenium.pages;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
@@ -10,7 +9,7 @@ public class LoginPage {
 	WebDriver driver;
 	Properties selectors;
 
-	public LoginPage(WebDriver driver, Properties selectors) throws IOException {
+	public LoginPage(WebDriver driver, Properties selectors) {
 		this.driver = driver;
 		this.selectors = selectors;
 	}
