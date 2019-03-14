@@ -37,7 +37,7 @@ public class TestCallReport {
 		props.load(objTestFile);
 		selectors = new Properties();
 		FileInputStream objSelectorsFile = new FileInputStream(
-				System.getProperty("user.dir") + "\\selector.properties");
+				System.getProperty("user.dir") + "\\selectors.properties");
 		selectors.load(objSelectorsFile);
 
 		// initialize webdriver
