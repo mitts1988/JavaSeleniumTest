@@ -29,7 +29,7 @@ public class TestCallReport {
 	Properties props;
 	Properties selectors;
 
-	@BeforeTest
+	@BeforeTest(groups = "Regression")
 	public void setup() throws IOException {
 		// load properties
 		props = new Properties();
@@ -59,7 +59,7 @@ public class TestCallReport {
 		objLogin.loginToSalesforce(props.getProperty("user_id"), props.getProperty("password"));
 	}
 
-	@Test
+	@Test(groups = "Regression")
 	public void recordACall() {
 		// 2. Navigate to "My Accounts" using tab near top of home page.
 		objHome.clickMyAccounts();
@@ -123,7 +123,7 @@ public class TestCallReport {
 		objHome.clickHome();
 	}
 
-	@AfterTest
+	@AfterTest(groups = "Regression")
 	public void teardown() {
 		// 12. As final step, the script should logout (found on drop down menu in upper
 		// right
