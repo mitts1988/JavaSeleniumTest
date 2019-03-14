@@ -93,7 +93,10 @@ public class TestCallReport {
 		// Labrinone should show up first (from top down) under Call Discussion section.
 		List<String> products = objCallReport.getCallDiscussionProducts();
 		for (int i = 0; i < products.size(); i++) {
-			Assert.assertTrue(products.get(i).contains(callDiscussionProducts[i]));
+			String actual = products.get(i);
+			String expected = callDiscussionProducts[i];
+			Assert.assertTrue(actual.contains(expected), actual + " is displayed, but expected " + expected
+					+ ". The elements displayed are incorrect or out of order.");
 		}
 		// 10. In Samples and Promotional Items section, select "QNASL Co-Pay Card", and
 		// change quantity to 2.

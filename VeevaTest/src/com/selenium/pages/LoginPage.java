@@ -24,12 +24,18 @@ public class LoginPage {
 		driver.findElement(By.id(selectors.getProperty("username_textbox"))).sendKeys(strUserName);
 	}
 
-	// inputs password into textbox
+	/**
+	 * inputs password into textbox
+	 * 
+	 * @param strPassword password to be entered into the textbox
+	 */
 	public void inputPassword(String strPassword) {
 		driver.findElement(By.id(selectors.getProperty("password_textbox"))).sendKeys(strPassword);
 	}
 
-	// clicks the login button
+	/**
+	 * clicks the login button
+	 */
 	public void clickLogin() {
 		driver.findElement(By.id(selectors.getProperty("login_button"))).click();
 	}
