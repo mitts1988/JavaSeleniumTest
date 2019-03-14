@@ -27,13 +27,18 @@ public class TestCallReport {
 	CallReportPage objCallReport;
 	SavedCallReport objSavedCallReport;
 	Properties props;
+	Properties selectors;
 
 	@BeforeTest
 	public void setup() throws IOException {
 		// load properties
 		props = new Properties();
-		FileInputStream objfile = new FileInputStream(System.getProperty("user.dir") + "\\application.properties");
-		props.load(objfile);
+		FileInputStream objTestFile = new FileInputStream(System.getProperty("user.dir") + "\\test.properties");
+		props.load(objTestFile);
+		selectors = new Properties();
+		FileInputStream objSelectorsFile = new FileInputStream(
+				System.getProperty("user.dir") + "\\selector.properties");
+		selectors.load(objSelectorsFile);
 
 		// initialize webdriver
 		System.setProperty("webdriver.chrome.driver", ".//drivers//chromedriver.exe");
@@ -43,15 +48,14 @@ public class TestCallReport {
 		driver.manage().window().maximize();
 
 		// initializes page objects
-		objLogin = new LoginPage(driver);
-		objHome = new HomePage(driver);
-		objAccountsTab = new MyAccountsTab(driver);
-		objAccount = new AccountPage(driver);
-		objCallReport = new CallReportPage(driver);
-		objSavedCallReport = new SavedCallReport(driver);
+		objLogin = new LoginPage(driver, selectors);
+		objHome = new HomePage(driver, selectors);
+		objAccountsTab = new MyAccountsTab(driver, selectors);
+		objAccount = new AccountPage(driver, selectors);
+		objCallReport = new CallReportPage(driver, selectors);
+		objSavedCallReport = new SavedCallReport(driver, selectors);
 
-		// 1. Log-in to application from a web browser (e.g. Internet Explorer, Firefox,
-		// Chrome, etc.).
+		// 1. Log-in to application from a web browser
 		objLogin.loginToSalesforce(props.getProperty("user_id"), props.getProperty("password"));
 	}
 
@@ -93,7 +97,8 @@ public class TestCallReport {
 		}
 		// 10. In Samples and Promotional Items section, select "QNASL Co-Pay Card", and
 		// change quantity to 2.
-		objCallReport.selectSamplesAndPromotionalItems("QNASL Co-Pay Card", "2");
+		objCallReport.selectSamplesAndPromotionalItems(props.getProperty("samples_and_promotional_items"),
+				props.getProperty("samples_and_promotional_items_quantity"));
 		// 11. Call report should be saved by clicking "Save" button with a check for
 		// successful submission.
 		objCallReport.saveCall();

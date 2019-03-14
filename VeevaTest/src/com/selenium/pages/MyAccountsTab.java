@@ -1,6 +1,5 @@
 package com.selenium.pages;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -9,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 public class MyAccountsTab {
 	WebDriver driver;
-	Properties selector;
+	Properties selectors;
 
 	/**
 	 * Class constructor specifying the WebDriver
@@ -17,12 +16,9 @@ public class MyAccountsTab {
 	 * @param driver
 	 * @throws IOException
 	 */
-	public MyAccountsTab(WebDriver driver) throws IOException {
+	public MyAccountsTab(WebDriver driver, Properties selectors) throws IOException {
 		this.driver = driver;
-		// load properties
-		selector = new Properties();
-		FileInputStream objfile = new FileInputStream(System.getProperty("user.dir") + "\\selector.properties");
-		selector.load(objfile);
+		this.selectors = selectors;
 	}
 
 	/**
@@ -31,8 +27,8 @@ public class MyAccountsTab {
 	 * @param strName name of person on the list you wish to click
 	 */
 	public void clickName(String strName) {
-		driver.switchTo().frame(selector.getProperty("my_accounts_iframe"));
-		String xpath = selector.getProperty("my_accounts_name");
+		driver.switchTo().frame(selectors.getProperty("my_accounts_iframe"));
+		String xpath = selectors.getProperty("my_accounts_name");
 		xpath = new StringBuilder(xpath).insert(xpath.indexOf("'") + 1, strName).toString();
 		driver.findElement(By.xpath(xpath)).click();
 	}
@@ -43,6 +39,6 @@ public class MyAccountsTab {
 	 * @return the string of title of current screen
 	 */
 	public String getFormTitle() {
-		return driver.findElement(By.cssSelector(selector.getProperty("form_title"))).getText();
+		return driver.findElement(By.cssSelector(selectors.getProperty("form_title"))).getText();
 	}
 }

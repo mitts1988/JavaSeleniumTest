@@ -1,6 +1,5 @@
 package com.selenium.pages;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -9,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 public class SavedCallReport {
 	WebDriver driver;
-	Properties selector;
+	Properties selectors;
 
 	/**
 	 * Class constructor specifying the WebDriver
@@ -17,16 +16,13 @@ public class SavedCallReport {
 	 * @param driver
 	 * @throws IOException
 	 */
-	public SavedCallReport(WebDriver driver) throws IOException {
+	public SavedCallReport(WebDriver driver, Properties selectors) throws IOException {
 		this.driver = driver;
-		// load properties
-		selector = new Properties();
-		FileInputStream objfile = new FileInputStream(System.getProperty("user.dir") + "\\selector.properties");
-		selector.load(objfile);
+		this.selectors = selectors;
 	}
 
 	public String getAccountName() {
-		return driver.findElement(By.cssSelector(selector.getProperty("account_name"))).getText();
+		return driver.findElement(By.cssSelector(selectors.getProperty("account_name"))).getText();
 	}
 
 	/**
@@ -35,7 +31,7 @@ public class SavedCallReport {
 	 * @return the title of the current section
 	 */
 	public String getPageTitle() {
-		return driver.findElement(By.cssSelector(selector.getProperty("form_title"))).getText();
+		return driver.findElement(By.cssSelector(selectors.getProperty("form_title"))).getText();
 	}
 
 	/**
@@ -44,6 +40,6 @@ public class SavedCallReport {
 	 * @return the status of the call report
 	 */
 	public String getStatus() {
-		return driver.findElement(By.name(selector.getProperty("report_status"))).getText();
+		return driver.findElement(By.name(selectors.getProperty("report_status"))).getText();
 	}
 }
