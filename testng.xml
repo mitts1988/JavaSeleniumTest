@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Veeva Assessment Test">
-  <test name="Record A Call">
-  	<groups>
-      <run>
-        <include name="Regression"/>
-      </run>
-    </groups>
-    <classes>
-       <class name="com.selenium.tests.TestCallReport" />
-    </classes>
-  </test>
+	<test name="Record A Call">
+		<groups>
+			<run>
+				<include name="Assessment" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.selenium.tests.TestCallReport" />
+		</classes>
+	</test>
 </suite>

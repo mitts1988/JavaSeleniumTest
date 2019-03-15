@@ -26,15 +26,15 @@ public class TestCallReport {
 	AccountPage objAccount;
 	CallReportPage objCallReport;
 	SavedCallReport objSavedCallReport;
-	Properties props;
+	Properties testCaseProps;
 	Properties selectors;
 
-	@BeforeTest(groups = "Regression")
+	@BeforeTest(groups = "Assessment")
 	public void setup() throws IOException {
 		// load properties
-		props = new Properties();
+		testCaseProps = new Properties();
 		FileInputStream objTestFile = new FileInputStream(System.getProperty("user.dir") + "\\test.properties");
-		props.load(objTestFile);
+		testCaseProps.load(objTestFile);
 		selectors = new Properties();
 		FileInputStream objSelectorsFile = new FileInputStream(
 				System.getProperty("user.dir") + "\\selectors.properties");
@@ -44,7 +44,7 @@ public class TestCallReport {
 		System.setProperty("webdriver.chrome.driver", ".//drivers//chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.navigate().to(props.getProperty("url"));
+		driver.navigate().to(testCaseProps.getProperty("url"));
 		driver.manage().window().maximize();
 
 		// initializes page objects
@@ -56,15 +56,15 @@ public class TestCallReport {
 		objSavedCallReport = new SavedCallReport(driver, selectors);
 
 		// 1. Log-in to application from a web browser
-		objLogin.loginToSalesforce(props.getProperty("user_id"), props.getProperty("password"));
+		objLogin.loginToSalesforce(testCaseProps.getProperty("user_id"), testCaseProps.getProperty("password"));
 	}
 
-	@Test(groups = "Regression")
+	@Test(groups = "Assessment")
 	public void recordACall() {
 		// 2. Navigate to "My Accounts" using tab near top of home page.
 		objHome.clickMyAccounts();
 		// 3. Select "Adams, Bob" from the My Accounts list.
-		objAccountsTab.clickName(props.getProperty("name_from_account_list"));
+		objAccountsTab.clickName(testCaseProps.getProperty("name_from_account_list"));
 		// 4. Near the top of the Account page is a "Record A Call" button. Select this
 		// button.
 		objAccount.clickRecordACall();
@@ -76,11 +76,11 @@ public class TestCallReport {
 		}
 		// 6. On Call Report page, select "Mass Add Promo Call" from the Record Type
 		// drop down list.
-		objCallReport.selectRecordType(props.getProperty("record_type"));
+		objCallReport.selectRecordType(testCaseProps.getProperty("record_type"));
 		// 7. On Call Report page, the script should select Cholecap and Labrinone in
 		// Detail Priority section.
-		String[] callDiscussionProducts = { props.getProperty("call_discussion_product_1"),
-				props.getProperty("call_discussion_product_2") };
+		String[] callDiscussionProducts = { testCaseProps.getProperty("call_discussion_product_1"),
+				testCaseProps.getProperty("call_discussion_product_2") };
 		for (String product : callDiscussionProducts) {
 			objCallReport.selectDetailingPriorityOptions(product);
 		}
@@ -100,22 +100,22 @@ public class TestCallReport {
 		}
 		// 10. In Samples and Promotional Items section, select "QNASL Co-Pay Card", and
 		// change quantity to 2.
-		objCallReport.selectSamplesAndPromotionalItems(props.getProperty("samples_and_promotional_items"),
-				props.getProperty("samples_and_promotional_items_quantity"));
+		objCallReport.selectSamplesAndPromotionalItems(testCaseProps.getProperty("samples_and_promotional_items"),
+				testCaseProps.getProperty("samples_and_promotional_items_quantity"));
 		// 11. Call report should be saved by clicking "Save" button with a check for
 		// successful submission.
 		objCallReport.saveCall();
 		{
 			String actualTitle = objSavedCallReport.getPageTitle();
-			String expectedTitle = props.getProperty("record_type");
+			String expectedTitle = testCaseProps.getProperty("record_type");
 			Assert.assertEquals(actualTitle, expectedTitle,
 					"Expected to be on a " + expectedTitle + " page, but on a " + actualTitle + " instead.");
 			String actualName = objSavedCallReport.getAccountName();
-			String expectedName = props.getProperty("name_from_account_list");
+			String expectedName = testCaseProps.getProperty("name_from_account_list");
 			Assert.assertEquals(actualName, expectedName,
 					"Expected " + expectedName + " to be the account holder, but " + actualName + " is.");
 			String actualStatus = objSavedCallReport.getStatus();
-			String expectedStatus = props.getProperty("expected_call_report_status");
+			String expectedStatus = testCaseProps.getProperty("expected_call_report_status");
 			Assert.assertEquals(actualStatus, expectedStatus,
 					"Expected " + expectedStatus + " to be the report status, but " + actualStatus + " is.");
 		}
@@ -123,7 +123,7 @@ public class TestCallReport {
 		objHome.clickHome();
 	}
 
-	@AfterTest(groups = "Regression")
+	@AfterTest(groups = "Assessment")
 	public void teardown() {
 		// 12. As final step, the script should logout (found on drop down menu in upper
 		// right
