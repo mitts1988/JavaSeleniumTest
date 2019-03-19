@@ -125,8 +125,7 @@ public class TestCallReport {
 
 	@AfterTest(groups = "Assessment")
 	public void teardown() {
-		// 12. As final step, the script should logout (found on drop down menu in upper
-		// right
+		// 12. As final step, the script should logout 
 		objHome.logout();
 		driver.close();
 	}
